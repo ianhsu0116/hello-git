@@ -1,7 +1,7 @@
-# 學習 git 的 file
-
+# 學習如何使用git
 ---
 
+#下方為node 筆記
 # REPL (read, evaluate, print, loop)
 
 直接在終端機內開啟 node.js 去編輯（較少使用）
