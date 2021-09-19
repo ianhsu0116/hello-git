@@ -1,11 +1,5 @@
-# Git 練習專案
+# hello-git
 
-III MFEEE20 的 git 練習專案
+學習使用 git
+=======
 
-## 練習在頁面顯示程式碼
-
-```bash=
-console.log("程式碼練習")
-```
-
----
