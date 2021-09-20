@@ -1,7 +1,9 @@
-# 學習如何使用git
+# 學習如何使用 git
+
 ---
 
-#下方為node 筆記
+# 下方為 node 筆記
+
 # REPL (read, evaluate, print, loop)
 
 直接在終端機內開啟 node.js 去編輯（較少使用）
@@ -29,6 +31,8 @@ _註解：當 VScode 編輯完成的程式碼，使用 **Node.js** 來跑時， 
 });
 ```
 
+---
+
 ## **filename, **dirname
 
 _註解：一個是顯示當前檔案位置，一個則是當前檔案的母資料夾的位置_
@@ -46,7 +50,7 @@ console.log(__dirname) / Users / ianian880116 / Desktop / JS;
 
 _小知識：通常在定一個 module 時都會用 const, 因為通常不會再去改變它_
 
-## exports, require
+### exports, require
 
 _註解：將做好的功能丟出 及拿來用的方法_
 
@@ -124,7 +128,7 @@ console.log(path.basename(__filename));
 // app.js
 ```
 
-## url
+### url
 
 ```jsx
 const url = require("url");
@@ -200,6 +204,8 @@ v4 是舊版， v6 則是目前最新版
 
 ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1f15929-ffae-42c3-8412-adee2064cab5/_2021-06-09_9.01.38.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1f15929-ffae-42c3-8412-adee2064cab5/_2021-06-09_9.01.38.png)
 
+---
+
 # DNS (Domain Name System)
 
 **註解：**將人腦理解的語言轉換為電腦理解的語言之工具
@@ -207,6 +213,8 @@ v4 是舊版， v6 則是目前最新版
 輸入網址後，會自動將文字變成二進位的數字型態
 
 ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fe4cfdff-8ae8-465d-936b-2dcf4921dc0a/_2021-06-09_9.06.00.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fe4cfdff-8ae8-465d-936b-2dcf4921dc0a/_2021-06-09_9.06.00.png)
+
+---
 
 # PORT (接口，連接阜)
 
