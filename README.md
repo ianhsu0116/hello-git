@@ -2,372 +2,263 @@
 
 ---
 
-# 下方為 node 筆記
+# 下方為 git 筆記
 
-# REPL (read, evaluate, print, loop)
+# Unix (for MacOS, Linux user)
 
-直接在終端機內開啟 node.js 去編輯（較少使用）
+**\*註解：** Unix 是一種由 At&t 公司的 Bell Labs 發明出來的，是一種電腦作業系統(70 年代主流)，現在雖然沒人在用了，但在**MacOs, Linux**系統中 此功能就跟 **Windows 內的 CMD 一樣\***
 
----
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/33c05f30-d400-4008-aff4-124d8af0abb7/_2021-05-19_4.43.14.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/33c05f30-d400-4008-aff4-124d8af0abb7/_2021-05-19_4.43.14.png)
 
-# Module
-
-_註解：就是很多個有功能性的 JS Files 整合在一起的 File，這些功能是可以被自己或是他人重複利用的。_
-
-## Module Wrapper(包裝)
-
-_註解：當 VScode 編輯完成的程式碼，使用 **Node.js** 來跑時， 在 codes 的外層會自動被加上一個 function(), 目的是使執行的**程式碼的 scope 改成 module scope** ，只有在當前的 module function 內才有意義_
-
-!! 只有在 node.js 內 exports, require, module, **filename, **dirname 才有效，在網頁內跑他會顯示 not defined
+## Unix Commend
 
 ```jsx
-// 範例
-(function (exports, require, module, __filename, __dirname) {
-  sayHi("Ian");
+// 一些常用的命令
+**pwd: 顯示當前所在位置**
 
-  function sayHi(name) {
-    console.log(name + " Says Hi~");
-  }
-});
+**cd: change directory 換到指定頁面（或資料夾內）**
+ex. ****cd Desktop  // 到桌面
+
+**Ls: list all files inside the directory
+
+mkdir: 新增資料夾**
+ex. mkdir project  // 在當前頁面新增一名為project的資料夾
+
+**touch: 新增文件**
+ex. touch index.html     // 在當前頁面新增index.html檔案
+
+**cd ..: 退回上一個資料夾 ！cd及..中間的空白格是必要的
+
+rm: remove files 移除當前資料夾的某文件**
+ex. rm index.html
+
+**rmdir**: **remove directory 移除資料夾**
+ex. rmdir project //前提是移除前必須確定整個資料夾為空的 否則無法移除
+
+**rm -rf: remove force強制移除資料夾，不管內部是否為空的**
+ex. rm -rf project
+
+**control + L : 清空當前頁面（非清除 只是騰出空間）
+
+code files name: 直接在終端機內打開vscode並開好檔案，vscode的特殊功能
+ex. code project // vscode會直接打開並開起內部所有文件**
+
+// 以下示範在project內新增基本的html, css and js files
+xuxiangyande-MacBook-Air:project ianian880116$ touch index.html
+xuxiangyande-MacBook-Air:project ianian880116$ touch app.js
+xuxiangyande-MacBook-Air:project ianian880116$ mkdir styles
+xuxiangyande-MacBook-Air:project ianian880116$ cd styles
+xuxiangyande-MacBook-Air:styles ianian880116$ touch style.scss
+xuxiangyande-MacBook-Air:styles ianian880116$ cd ..
+
+```
+
+# 20210918 新增
+
+```jsx
+// 複製
+**cp
+ex. cp a.txt b.txt // 將a.txt複製並取名為b.txt
+
+// 移動
+mv
+
+// 直接在終端機編輯檔案
+nano
+ex. nano test.txt
+
+// 列出某file內的東西
+cat
+ex. cat test.txt
+
+// 離開當前狀態
+Q, control + c
+ex. git config --list, git log的時候
+
+// 在commit前，查看此次修改哪些code,比較working Dir 跟 Stuging Area的差異
+git diff [file name]
+ex. git diff test.txt
+
+// 比較Stuging Area 跟 local Repo的差異
+git diff --cached [file name]
+ex. git diff --cached test.txt
+
+// 查看所有commit 並且帶上修改了哪裡的細節
+git log --stat
+
+// add + commit 快捷方式 (只能用於 已commit過的file)
+git commit -am "輸入commit敘述"
+
+// 從Stuging Area 或是 local repo中移除
+git restore --staged filename
+
+// 反悔剛剛的修改 或是 回覆不小心刪除的檔案
+git restore filename
+
+// 假設不小心刪除了test, 如果是有用git的形況下，可以用這個復原 (要在add前才能回復，add之後就ggㄌ)
+git restore test.txt
+
+// 去到各個不同的commit 用git log可以看各個版本的版號
+git checkout <版本號(輸入前幾碼即可)>
+
+// 轉換不同的branch (原本是checkout 新版的會用switch)
+git switch login
+
+// 列出全部檔案
+ls
+
+// 列出全部檔案（列出隱藏檔）
+ls -a
+
+// 以完整格式列出檔案
+ls -l
+
+// 以完整格式列出所有的檔案
+ls -al
+
+// h -> 指的是humam, 指的是顯示人看得懂的東西
+ls -alh  // 此會把檔案大小換成MB, KB ,G.....**
+
 ```
 
 ---
 
-## **filename, **dirname
+# Gti, GitHub
 
-_註解：一個是顯示當前檔案位置，一個則是當前檔案的母資料夾的位置_
+## Git commend
 
-```jsx
-// 範例：假設目前在桌面上的JS資料夾，檔案名稱為app.js
-console.log(__filename) / Users / ianian880116 / Desktop / JS / app.js;
+**_註解：_**
 
-console.log(__dirname) / Users / ianian880116 / Desktop / JS;
-```
+**Work Directory:** 是自己電腦的資料夾
 
----
+**Local Repository: 又稱 Repo,** 類似共用資料夾的存在，同一個 team 的人員都會將編輯好的 code 上傳到此
 
-## 製作自己的 Module
+**Staging Area:** 是一個當我們要將資料丟入 LR 時，會為了確保大家的版本一致，會先將資料放入此地方，接著在用 commit 丟入 LR 的時候會同時確認版本，若是版本不符就自動更新
 
-_小知識：通常在定一個 module 時都會用 const, 因為通常不會再去改變它_
+(add→ 資料進入 Staging Area→commit→ 檢查版本更新沒問題後丟入 LR)
 
-### exports, require
+**Cloud Repository: 又稱 Remote,** 類似雲端資料夾(GitHub), 編輯好的檔案就會上傳到 GitHub
 
-_註解：將做好的功能丟出 及拿來用的方法_
+### 常用的 Git Commends
 
 ```jsx
-// 在每個步驟告一段落時，可以console.log(module) 來看有什麼變化（注意：export, parent, children）
+**git init**
+Initialized empty Git repository，創造一個隱藏的git資料夾，用來追蹤此資料夾內的所有改變
+用 comand + shift + . 來顯示隱藏的files
 
-// try1.js File
-function morning(name) {
-  console.log("Good morning " + name);
-}
+**git config --global user.name "Ian Hsu"
+git config --global user.email"ianian@fakemail.com"**
+configuration, 設定作者跟信箱是為了讓主管或是同事知道這個code是誰寫的，以免找不倒人
 
-function sayHi(name) {
-  console.log("Hi! I'm " + name);
-}
+**git config --list**
+查詢有沒有成功設定name, email的地方
 
-module.exports.morning = morning;
-module.exports.sayHi = sayHi;
-//  設定兩function並且exports出去
-// console.log(module)看看
-// module因為太常用了，在輸入時可以省略
+**git status**
+查詢當前狀態，哪些檔案沒有add或是沒被commit，以及哪些有
 
-// app.js File
-const try1 = require("./try1"); // 先連結try1即可使用他的所有功能
+**git add**
+將指定的檔案放入Staging Area等待commit
+ex. git add index.html / git add app.js
 
-try1.morning("Ian");
-// 將著在終端機執行後就會顯示
-// Good morning Ian
+**git add** .
+將當前資料夾內所有檔案丟入Staging Area
+
+**git add** *.放檔案類型
+將當前資料夾內所有**同一檔案類型**丟入Staging Area
+ex. git add *.html
+
+**git commit -m "add some code into iandx.html"**
+將當前資料夾所有檔案commit並丟入LR，""內可以輸入一些註解，解釋你做了啥更動
+
+**git rm --cached ""**
+從Staging Area內移除某資料，cached是暫存的意思
+
+// 補充 每當將code編輯結束過後，都需再將檔案 add 以及 commit一次！
+
+**git log**
+查詢歷史，會顯示先前被commit過的所有次數，及每次的 時間,作者,email
+
+**.gitignore**
+假設不想讓file內的log.txt文件在 add . 的時候被加入Staging Area內的話
+先file內新增檔名為.gitignore的文件，接著在文件內輸入log.txt。
+這樣即可避免log.txt被add
 ```
 
-情況二（真實使用方式）
+## branch, checkout and merge
 
-\*簡單來說就是：同類 js 文件放入一文件夾內，在此文件夾內新增一 **index.js**文件，接著將所有其他文件的功能都 exports 到 index.js 內後，**再由 index.js 統一去 exports\***
+**_註解：若都沒設定，一開始是在 master 上。可以設定其他分支(branch)來讓各個組員能分開編輯同一文件的不同部分_**
+
+**_一個資料夾內可以有很多不同分支，每個分之內都可以有自己的文件，假設兩分支內同的文件也可以各自有自己的 code(寫完後再合併)，_**
 
 ```jsx
-// 正常會將同類的Module File放在一個dir內
-// 假設目前 greeting dir內裝著 try1, try2
-// 首先 先在greeting內 新建一個**index.js** File
-// **index.js 內**
-const try1 = require("./try1"); // 先得到try1, try2的exports
-const try2 = require("./try2");
+**git branch    創建一個分支**
+創建一個叫 login 的branch => git branch login
 
-exports.morning = try1.morning; // 再將得到的東西exports出去
-exports.sayHi = try1.sayHi;
-exports.night = try2.night;
+**git ckeckout 移動到某分支**
+移動到 login branch => git ckeckout login
 
-// **app.js 內**
-const greeting = require("./greeting"); // 這裡的greeting指的是整個dir 但只會return index.js的內容
-console.log(greeting);
-//  如有顯示三個function則表示成功
+**git merge 將某分支合併到master**
+假設目前在master，將login和master合併 => git merge login
+注意！ 合併前必須先add . / commit
+若是login 和 master中的code 原先重疊的部分被更動了，會出現conflict, 需解決後才能commit
+出現conflict: 回到code內去即可選擇解決辦法
+**補充！： 解決完conflict後 還需要再add and commit一次！！！！！**
+合併後就會將login的內容加入master內，但login的內容還是會單獨保存下來，checkout login即可看見
 ```
 
----
+### **補充！： 解決完 conflict 後 還需要再 add and commit 一次！！！！！**
 
-## Build-in Modules （內建的 modules)
+## Git push
 
-_註解：要使用 module 時，都需要先 require_
+**_註解：將編輯好的檔案從 Local Repo 丟入 GutHub_**
 
-### path
+### 方法一
 
 ```jsx
-const path = require("path");
-
-// 1 **join()**,  功能：把兩個path相加，**等於是更改路徑**
-console.log(path.join(__dirname, "try1.js"));
-// /Users/ianian880116/Desktop/JavaScript練習/try1.js
-
-// 2  **extname()** 功能：顯示當前文件的類型
-console.log(path.extname(__filename));
-// .js
-
-// 3 **basename()** 功能：顯示當前文件(or文件夾文件夾)全名
-console.log(path.basename(__filename));
-// app.js
+在電腦中先做出資料夾及文件後，git init => add => commit => Local Repo，再使用
+**git remote add origin https://github.com/ianian880116/project001.git**
+將其連結到github的雲端資料夾， 接著再用
+**git push -u origin master**
+將masters內的所有data丟入remote（github）內
 ```
 
-### url
+### 方法二 (better way)
 
 ```jsx
-const url = require("url");
+先在GitHub新建雲端資料夾後，在桌面的 終端機輸入
+**git clone https://github.com/ianian880116/project002.git**
+即可將GitHub的整個資料夾複製下來本地
+接著再對文件進行編輯完成後 add => commit => Local Repo 再使用
+**git push https://github.com/ianian880116/project002.git**
+將編輯完後的文件丟回去GitHub
 
-const formURL =
-  "http://120.7.0.4:5201/Users/ianian880116/Desktop/IanProjects/portfolio%20project/contact.html?name=IAN&email=ian%40gmial.com&phone=0988888888&need=no/Desktop/IanProjects/portfolio%20project/index.html";
-const parsedURL = url.parse(formURL, true);
-
-// 1 host
-console.log(parsedURL.host);
-// 120.7.0.4:5201      5201為PORT)
-
-// 2 hostname
-console.log(parsedURL.hostname);
-// 120.7.0.4
-
-// 3 path  功能：顯示當前檔案的路徑
-console.log(parsedURL.path);
-// /Users/ianian880116/Desktop/IanProjects/portfolio%20project/contact.html?name=IAN&email=ian%40gmial.com&phone=0988888888&need=no/Desktop/IanProjects/portfolio%20project/index.html
-
-// 4 pathname 功能：顯示當前檔案的名稱
-console.log(parsedURL.pathname);
-// /Users/ianian880116/Desktop/IanProjects/portfolio%20project/contact.html
-
-// 5 query 功能：通常用在取得表單輸入的資料
-console.log(parsedURL.query);
-// [Object: null prototype] {
-//  name: 'IAN',
-//  email: 'ian@gmial.com',
-//  phone: '0988888888',
-//  need: 'no/Desktop/IanProjects/portfolio project/index.html'
-// }
-
-console.log(parsedURL.query.email);
-// ian@gmial.com
+如此一來省下了幫文件initialize的步驟
+**clone： 將網址內的所有檔案下載（複製）下來
+註解： what does --set upstream do**
+https://stackoverflow.com/questions/18031946/what-does-set-upstream-do
 ```
 
-## fs (file system)
-
-\*用途：在 JS **製作文件\***
-
-範例：_使用者在使用網路時發生 bug( error )時，可以將其記錄下來給開發者修正_
+## Git pull
 
 ```jsx
-// writeFile() 功能：增加一文件檔
-// 假設我們要用writeFile新增一文字檔案，若是失敗的話return e
-const fs = require("fs");
-// ("File name", "text something", 任何一種func，通常會用匿名arrow) e指的是error
-fs.writeFile("try.txt", "Tody is a good day.", (e) => {
-  if (e) throw e; // if 下面的console是 else (ifStatement的簡寫)
 
-  console.log("File is been written.");
-});
-
-// readFile 功能：閱讀某文件檔
-// ("放文件路徑", "utf-8", (e指errow, data指的是文件內的資料) => {})
-fs.readFile("./try.txt", "utf-8", (e, data) => {
-  if (e) throw e;
-
-  console.log(data);
-});
-
-// 以上 假設不小心手誤打錯，就會通知開發者有errow
+要從雲端上拿取最新版本的文件時 可以這樣使用
+假設雲端上有同事更新的最新版的文件後
+可以在當前文件的資料夾內使用 **gut pull 此處放檔案所在的網址
+ex. git pull https://github.com/ianian880116/project001.git**
+即可將資料更新成最新版本
 ```
 
----
+# 20210918 新增
 
-# IP
+現在 push, pull 已經無法用 account, password 認證了，需要用專屬的 token 認證
 
-**註解：**只要任意裝置連接網路，就會產生一個 IP 位置
+詳細資訊：[https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
-v4 是舊版， v6 則是目前最新版
+# 20210919 新增
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1f15929-ffae-42c3-8412-adee2064cab5/_2021-06-09_9.01.38.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1f15929-ffae-42c3-8412-adee2064cab5/_2021-06-09_9.01.38.png)
+## git flow
 
----
-
-# DNS (Domain Name System)
-
-**註解：**將人腦理解的語言轉換為電腦理解的語言之工具
-
-輸入網址後，會自動將文字變成二進位的數字型態
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fe4cfdff-8ae8-465d-936b-2dcf4921dc0a/_2021-06-09_9.06.00.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fe4cfdff-8ae8-465d-936b-2dcf4921dc0a/_2021-06-09_9.06.00.png)
-
----
-
-# PORT (接口，連接阜)
-
-**註解：**IP 位置後面的一數字就是 port, 負責處理各種不同資料，一組對應一種功能。
-
-ex. 80 ⇒ HTTP, 20 ⇒ FTP, 53 ⇒ DNS, 443 ⇒ HTTPs
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/991202e5-4d1b-4a64-8553-153e6afd03eb/_2021-06-09_9.12.13.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/991202e5-4d1b-4a64-8553-153e6afd03eb/_2021-06-09_9.12.13.png)
-
----
-
-# Node Server (伺服器)
-
-小知識：node app.js 可以使伺服器開始運作，control+c 可停止。
-
-### 建構一個 port 為 3501 的伺服器
-
-```jsx
-const http = require("http");
-
-const server = http.createServer((req, res) => {
-  //(request, respond)
-  console.log(req.url); // (顯示當前網址的意思)
-
-  res.write("Hellow user.");
-  res.end();
-});
-
-server.listen(3501, () => {
-  console.log("Server is running on port 3501.");
-});
-```
-
-### 如網址為 / (未輸入任何文字)顯示 homepage，若是在網址後面輸入東西則顯示 Hello ...
-
-```jsx
-const http = require("http");
-const url = require("url");
-
-const server = http.createServer((req, res) => {
-  if (req.url == "/") {
-    res.write("You are on the Homepage .");
-    res.end();
-  } else {
-    let parsedURL = url.parse(req.url);
-    res.write("Hello " + parsedURL.pathname);
-    res.end();
-  }
-});
-
-server.listen(3501, () => {
-  console.log("Server is running on port 3501.");
-});
-```
-
-### 在 res.write 輸入 html 的 code
-
-```jsx
-const http = require("http");
-const url = require("url");
-
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "content-Type": "text/html" }); // 這句是為了讓html能在這運行
-  if (req.url == "/") {
-    res.write("<h1>You are on the Homepage .</h1>");
-    res.write(
-      "<p>Lorem ipsum dolor sit amet consectetur dolorum eos delectus maxime eaque at quo!</p>"
-    );
-    res.end();
-  } else {
-    let parsedURL = url.parse(req.url);
-    res.write("Hellow " + parsedURL.pathname);
-    res.end();
-  }
-});
-
-server.listen(3501, () => {
-  console.log("Server is running on port 3501.");
-});
-```
-
-### 使伺服器連結 到 index.html 並顯示其內容
-
-```jsx
-const http = require("http");
-const url = require("url");
-const fs = require("fs");
-const path = require("path");
-
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "content-Type": "text/html" });
-  if (req.url == "/") {
-    // readFile的路徑是指 當前檔案所在的資料夾位置再 + index.html, 故 imdex.html檔案的位置必須和app.js一樣。
-    fs.readFile(path.join(__dirname, "index.html"), (err, data) => {
-      if (err) {
-        throw err;
-      } else {
-        // 將index.html的data全部寫入3501這個伺服器
-        res.write(data);
-        res.end();
-      }
-    });
-  } else {
-    let parsedURL = url.parse(req.url);
-    res.write("Hellow " + parsedURL.pathname);
-    res.end();
-  }
-});
-
-server.listen(3501, () => {
-  console.log("Server is running on port 3501.");
-});
-```
-
----
-
-# Npm (Node package manager)
-
-_註解：幫助開發者管理下載下來的眾多 Modules~_
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3e0168f0-70ed-4acc-8bb7-6f4f845ce192/_2021-06-10_4.43.09.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3e0168f0-70ed-4acc-8bb7-6f4f845ce192/_2021-06-10_4.43.09.png)
-
-## 如何使用別人的 Modules
-
-用有名的 cowsay 來當示範
-
-```jsx
-// 前置作業
-在終端機 移動至要使用npm的dir後，輸入 npm init
-接著確認檔案名稱 => enter => npm version => enter => .......
-依序輸入至作者後 當前的dir內就會多出一package.json的檔案後 即可
-
-// 正式開始取得npm
-接著去 https://www.npmjs.com/package/cowsay
-將網站提供的下載方codes： npm i cowsay 複製入終端機內
-
-此時會發現dir內出現幾個其他資料夾，
-!! 並且 packade.json 內的 dependencies 就會出現 "cowsay": "^1.5.0" 這樣就完成了
-
-// 使用npm
-// 在vscode輸入
-var cowsay = require("cowsay");
-
-console.log(cowsay.say({
-    text : "I'm a moooodule",
-    e : "oO",
-    T : "U "
-}));
-
-再用終端機打開即可 （node app.js）
-
-```
-
-## 補充： nodemon
-
-是一個 npm, 功能是使開發者在 app.js 改變一些 code 時，不需要到終端機先停止 server 運行，再啟動
-
-可以直接運行新增加或減少的 code
+- 實際開發規則
+  - 原則上，絕對不會在 main/master, develop branch 去 push, 一定是用別的 branch 去 merge 進去
+  - 假設某功能會開發一陣子，那就會定時將 dev 的最新版本 merge 到我當前在開發的這個版本，這樣直到我最後功能做完，要將功能 merge 進去 dev 時，才不會有太多 conflict
