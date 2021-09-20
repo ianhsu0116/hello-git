@@ -116,8 +116,6 @@ const path = require("path");
 // 1 **join()**,  功能：把兩個path相加，**等於是更改路徑**
 console.log(path.join(__dirname, "try1.js"));
 // /Users/ianian880116/Desktop/JavaScript練習/try1.js
-// 也可以這樣用
-let x = path.join(__dirname, __filename);
 
 // 2  **extname()** 功能：顯示當前文件的類型
 console.log(path.extname(__filename));
